@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>System Breach Detected</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background: black;
+  color: red;
+  font-family: monospace;
+}
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: flash 0.5s infinite alternate;
+  text-align: center;
+  z-index: 9999;
+}
+.overlay h1 {
+  font-size: 3em;
+  margin: 0.2em 0;
+}
+.overlay p {
+  font-size: 1.5em;
+}
+.system-error {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255,0,0,0.9);
+  padding: 1em 2em;
+  border: 3px solid red;
+  box-shadow: 0 0 20px red;
+  animation: shake 0.3s infinite;
+}
+@keyframes flash {
+  0% { background: black; color: red; }
+  100% { background: red; color: black; }
+}
+@keyframes shake {
+  0% { transform: translate(-50%, -2px); }
+  50% { transform: translate(-50%, 2px); }
+  100% { transform: translate(-50%, -2px); }
+}
+</style>
+</head>
+<body>
+<div class="overlay" id="prankOverlay">
+  <div class="system-error">
+    <h1>⚠️ SYSTEM BREACH DETECTED ⚠️</h1>
+  </div>
+  <h1>YOUR DEVICE IS COMPROMISED</h1>
+  <p>ALL DATA HAS BEEN LOCKED</p>
+  <p>CONTACT ADMIN IMMEDIATELY</p>
+</div>
+
+<script>
+  // Try to go fullscreen on load
+  function goFullScreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen) {
+      el.requestFullscreen();
+    } else if (el.webkitRequestFullscreen) {
+      el.webkitRequestFullscreen();
+    } else if (el.mozRequestFullScreen) {
+      el.mozRequestFullScreen();
+    } else if (el.msRequestFullscreen) {
+      el.msRequestFullscreen();
+    }
+  }
+  // Attempt fullscreen
+  goFullScreen();
+
+  // After 10 seconds, replace content
+  setTimeout(() => {
+    const overlay = document.getElementById('prankOverlay');
+    overlay.innerHTML = `
+      <h1 style="font-size:3em; color:lime;">😄 IT'S JUST A PRANK!</h1>
+      <p style="font-size:1.5em; color:white;">No data was harmed.</p>
+    `;
+    overlay.style.animation = "none";
+    overlay.style.background = "black";
+  }, 10000);
+</script>
+</body>
+</html>
+
